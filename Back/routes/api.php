@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/terms', [TermController::class, 'index']);
+// https://laravel.com/docs/9.x/controllers#api-resource-routes
+
+Route::apiResource('terms', TermController::class);
