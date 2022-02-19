@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Term extends Model
+class TermType extends Model
 {
     use HasFactory;
 
@@ -18,13 +18,8 @@ class Term extends Model
         'name',
     ];
 
-    public function type()
+    public function terms()
     {
-        return $this->belongsTo(TermType::class, 'term_type_id');
-    }
-
-    public function criterias()
-    {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaTerm::class);
+        return $this->hasMany(Term::class);
     }
 }

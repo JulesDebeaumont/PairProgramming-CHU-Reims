@@ -7,8 +7,7 @@ id: int
 name: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1020</x><y>210</y><w>100</w><h>150</h></coordinates><panel_attributes>Term
 --
 id: int
-name: string
-type: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>290</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=-
+name: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>290</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=-
 m1=1
 m2=1..n</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>290</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=-
 m1=1
@@ -31,4 +30,10 @@ operator = &amp;&amp;: string</panel_attributes><additional_attributes></additio
 m1=1
 m2=0..n</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>120</x><y>350</y><w>50</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
-m2=0..n</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element></diagram>
+m2=0..n</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1020</x><y>480</y><w>100</w><h>150</h></coordinates><panel_attributes>TermType
+--
+id: int
+name: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>350</y><w>50</w><h>150</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=0..n</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element></diagram>

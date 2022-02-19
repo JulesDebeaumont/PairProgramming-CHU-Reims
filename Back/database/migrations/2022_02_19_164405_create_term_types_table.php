@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('terms', function (Blueprint $table) {
+        Schema::create('term_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('term_type_id')->constrained('term_types');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terms');
+        Schema::dropIfExists('term_types');
     }
 };

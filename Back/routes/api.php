@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TermController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/terms', function (Request $request) {
-    return $request->user();
-});
+Route::get('/terms', [TermController::class, 'index']);

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Term;
+use App\Models\TermType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,17 +18,17 @@ class TermSeeder extends Seeder
     {
         DB::table('terms')->insert([
             'name' => 'Age',
-            'type' => 'int',
+            'term_type_id' => TermType::where('name', 'Int')->first()->id,
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Sexe',
-            'type' => 'string',
+            'term_type_id' => TermType::where('name', 'String')->first()->id,
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Date de venue',
-            'type' => 'dateTime',
+            'term_type_id' => TermType::where('name', 'DateTime')->first()->id,
         ]);
 
         // Term::factory()->count(40)->create();
