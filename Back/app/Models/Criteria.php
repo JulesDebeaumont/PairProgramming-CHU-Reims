@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Term extends Model
+class Criteria extends Model
 {
     use HasFactory;
 
@@ -16,11 +16,15 @@ class Term extends Model
      */
     protected $fillable = [
         'name',
-        'type'
     ];
 
-    public function criterias()
+    public function terms()
     {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaTerm::class);
+        return $this->belongsToMany(Term::class, 'terms')->using(CriteriaTerm::class);
+    }
+
+    public function rules()
+    {
+        return $this->belongsToMany(Rule::class, 'rules')->using(CriteriaRule::class);
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Term extends Model
+class CriteriaRule extends Pivot
 {
     use HasFactory;
 
@@ -15,12 +15,6 @@ class Term extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'type'
+        'operator',
     ];
-
-    public function criterias()
-    {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaTerm::class);
-    }
 }

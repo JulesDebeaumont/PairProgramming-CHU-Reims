@@ -5,22 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Term extends Model
+class Rule extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
         'name',
-        'type'
     ];
 
     public function criterias()
     {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaTerm::class);
+        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaRule::class);
+    }
+
+    public function rules()
+    {
+        return $this->belongsToMany(Rule::class, 'rules')->using(RuleChildren::class);
     }
 }
