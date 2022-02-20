@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResources([
     'terms'=> TermController::class,
-    'termtypes' => TermTypeController::class,
+    'termTypes' => TermTypeController::class,
     'criterias' => CriteriaController::class,
     'operators'=> OperatorController::class,
-    'operatortype' => OperatorTypeController::class,
+    'operatorTypes' => OperatorTypeController::class,
     'rules'=> RuleController::class
 ]);

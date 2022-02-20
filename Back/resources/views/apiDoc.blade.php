@@ -422,25 +422,34 @@
             <table class="w-full shadow table-auto">
                 <thead class="uppercase bg-slate-700">
                     <tr class="p-6 m-2 text-neutral-300 border border-zinc-600 rounded">
-                        <th class="py-5">Methods</th>
+                        <th class="py-5">Methode(s)</th>
                         <th class="py-5">Uri</th>
+                        <th class="py-5">Model</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($routes as $route)
+                    @foreach ($routes as $key1 => $route)
                         <tr class="bg-slate-800 border border-zinc-600 rounded p-6 m-2 hover:bg-slate-700 transition">
                             <div>
                                 <td class="text-center  py-3">
-                                    @foreach ($route->methods as $key => $method)
-                                        <span class="text-cyan-500">{{ $key > 0 ? '|' : '' }}
+                                    @foreach ($route->methods as $key2 => $method)
+                                        <span class="text-cyan-400">{{ $key2 > 0 ? '|' : '' }}
                                             {{ $method }}</span>
                                     @endforeach
                                 </td>
 
                                 <td class="text-center  py-3">
                                     <span class="text-indigo-300 ml-8">
-                                       {{ $route->uri }}
+                                        {{ $route->uri }}
+                                    </span>
+                                </td>
+
+                                <td class="text-center  py-3">
+                                    <span class="text-sky-400 ml-8 capitalize">
+                                        {{ str_starts_with('api/', $route->uri) || $key1 < 4 ?
+                                          "" :
+                                          substr_replace(explode('/', $route->uri)[1], "", -1) }}
                                     </span>
                                 </td>
 

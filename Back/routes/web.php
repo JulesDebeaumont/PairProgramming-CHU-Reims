@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/api', function () {
-    return view('welcome', ['routes' => Route::getRoutes()]);
+    return view('apiDoc', ['routes' => Route::getRoutes()]);
 })->name('home');
