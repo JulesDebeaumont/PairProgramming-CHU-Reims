@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
+
+Route::get('/api', function () {
+    return view('welcome', ['routes' => Route::getRoutes()]);
+})->name('home');

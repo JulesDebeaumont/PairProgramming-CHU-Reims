@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\OperatorTypeController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\TermController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TermTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 // https://laravel.com/docs/9.x/controllers#api-resource-routes
 
-Route::apiResource('terms', TermController::class);
+Route::apiResources([
+    'terms'=> TermController::class,
+    'termtypes' => TermTypeController::class,
+    'criterias' => CriteriaController::class,
+    'operators'=> OperatorController::class,
+    'operatortype' => OperatorTypeController::class,
+    'rules'=> RuleController::class
+]);
