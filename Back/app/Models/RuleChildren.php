@@ -15,7 +15,13 @@ class RuleChildren extends Pivot
      * @var array<int, string>
      */
     protected $fillable = [
-        'operator',
+        'operator_id',
+        'parent_id',
+        'rule_id'
     ];
 
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class, 'operator_id');
+    }
 }

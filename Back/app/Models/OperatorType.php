@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class CriteriaTerm extends Pivot
+class OperatorType extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,11 @@ class CriteriaTerm extends Pivot
      * @var array<int, string>
      */
     protected $fillable = [
-        'operator',
-        'value',
+        'name',
     ];
+
+    public function operators()
+    {
+        return $this->hasMany(Operator::class);
+    }
 }

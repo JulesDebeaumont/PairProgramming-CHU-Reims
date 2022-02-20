@@ -20,11 +20,11 @@ class Rule extends Model
 
     public function criterias()
     {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaRule::class);
+        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaRule::class)->withPivot('operator_id');
     }
 
     public function rules()
     {
-        return $this->belongsToMany(Rule::class, 'rules')->using(RuleChildren::class);
+        return $this->belongsToMany(Rule::class, 'rules')->using(RuleChildren::class)->withPivot('operator_id');
     }
 }

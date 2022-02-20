@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TermEditRequest extends FormRequest
+class OperatorEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class TermEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:terms','min:2', 'max:255'],
-            'term_type_id' => ['required', 'exists:term_types.id']
+            'value' => ['required', 'unique:operators','min:2', 'max:255'],
+            'operator_type_id' => ['required', 'exists:operator_types.id']
         ];
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TermEditRequest;
-use App\Models\Term;
+use App\Http\Requests\OperatorEditRequest;
+use App\Models\Operator;
 use Illuminate\Http\Request;
 
-class TermController extends Controller
+class OperatorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class TermController extends Controller
      */
     public function index()
     {
-        $terms = Term::with('type')->get();
+        $operators = Operator::with('type')->get();
 
-        return response()->json($terms);
+        return response()->json($operators);
     }
 
     /**
@@ -26,34 +26,34 @@ class TermController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TermEditRequest $request)
+    public function store(OperatorEditRequest $request)
     {
-        $term = Term::create($request->validated());
+        $operator = Operator::create($request->validated());
 
-        return response()->json($term, 201);
+        return response()->json($operator, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\Operator  $operator
      * @return \Illuminate\Http\Response
      */
-    public function show(Term $term)
+    public function show(Operator $operator)
     {
-        return response()->json($term->with('type')->get());
+        return response()->json($operator->with('type')->get());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\Operator  $operator
      * @return \Illuminate\Http\Response
      */
-    public function update(TermEditRequest $request, Term $term)
+    public function update(OperatorEditRequest $request, Operator $operator)
     {
-        $term->update($request->validated());
+        $operator->update($request->validated());
 
         return response()->json();
     }
@@ -61,12 +61,12 @@ class TermController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\Operator  $operator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Term $term)
+    public function destroy(Operator $operator)
     {
-        $term->delete();
+        $operator->delete();
 
         return response()->json();
     }

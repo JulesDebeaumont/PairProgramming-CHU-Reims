@@ -16,11 +16,19 @@ class Criteria extends Model
      */
     protected $fillable = [
         'name',
+        'value',
+        'operator_id',
+        'term_id'
     ];
 
-    public function terms()
+    public function term()
     {
-        return $this->belongsToMany(Term::class, 'terms')->using(CriteriaTerm::class);
+        return $this->belongsTo(Term::class, 'term_id');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class, 'operator_id');
     }
 
     public function rules()

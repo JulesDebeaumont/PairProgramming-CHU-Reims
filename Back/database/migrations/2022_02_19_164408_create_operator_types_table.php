@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('criteria_terms', function (Blueprint $table) {
+        Schema::create('operator_types', function (Blueprint $table) {
             $table->id();
-            $table->string('operator');
-            $table->string('value');
-            $table->foreignId('criteria_id')->constrained('criterias');
-            $table->foreignId('term_id')->constrained('terms');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criteria_terms');
+        Schema::dropIfExists('operator_types');
     }
 };

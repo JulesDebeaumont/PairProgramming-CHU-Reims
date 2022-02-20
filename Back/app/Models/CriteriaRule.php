@@ -15,6 +15,13 @@ class CriteriaRule extends Pivot
      * @var array<int, string>
      */
     protected $fillable = [
-        'operator',
+        'rule_id',
+        'criteria_id',
+        'operator_id'
     ];
+
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class, 'operator_id');
+    }
 }

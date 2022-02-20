@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('operators', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('value');
-            $table->foreignId('term_id')->constrained('terms');
-            $table->foreignId('operator_id')->constrained('operators');
+            $table->foreignId('operator_type_id')->constrained('operator_types');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('operators');
     }
 };

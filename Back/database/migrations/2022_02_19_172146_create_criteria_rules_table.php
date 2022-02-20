@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('criteria_rules', function (Blueprint $table) {
             $table->id();
-            $table->string('operator')->default('&&');
             $table->foreignId('criteria_id')->constrained('criterias');
             $table->foreignId('rule_id')->constrained('rules');
+            $table->foreignId('operator_id')->constrained('operators');
             $table->timestamps();
         });
     }

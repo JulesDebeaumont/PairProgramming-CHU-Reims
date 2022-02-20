@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TermEditRequest;
-use App\Models\Term;
+use App\Http\Requests\TermTypeEditRequest;
+use App\Models\TermType;
 use Illuminate\Http\Request;
 
-class TermController extends Controller
+class TermTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class TermController extends Controller
      */
     public function index()
     {
-        $terms = Term::with('type')->get();
+        $termTypes = TermType::all();
 
-        return response()->json($terms);
+        return response()->json($termTypes);
     }
 
     /**
@@ -26,34 +26,34 @@ class TermController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TermEditRequest $request)
+    public function store(TermTypeEditRequest $request)
     {
-        $term = Term::create($request->validated());
+        $termType = TermType::create($request->validated());
 
-        return response()->json($term, 201);
+        return response()->json($termType, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\TermType  $termType
      * @return \Illuminate\Http\Response
      */
-    public function show(Term $term)
+    public function show(TermType $termType)
     {
-        return response()->json($term->with('type')->get());
+        return response()->json($termType);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\TermType  $termType
      * @return \Illuminate\Http\Response
      */
-    public function update(TermEditRequest $request, Term $term)
+    public function update(TermTypeEditRequest $request, TermType $termType)
     {
-        $term->update($request->validated());
+        $termType->update($request->validated());
 
         return response()->json();
     }
@@ -61,12 +61,12 @@ class TermController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Term  $term
+     * @param  \App\Models\TermType  $termType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Term $term)
+    public function destroy(TermType $termType)
     {
-        $term->delete();
+        $termType->delete();
 
         return response()->json();
     }

@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TermTypeSeeder::class,
             TermSeeder::class,
+            OperatorTypeSeeder::class,
+            OperatorSeeder::class,
             CriteriaSeeder::class,
             CriteriaTermSeeder::class,
             RuleSeeder::class,

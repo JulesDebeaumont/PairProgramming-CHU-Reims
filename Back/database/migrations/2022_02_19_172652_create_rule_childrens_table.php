@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('operator')->default('&&');
             $table->foreignId('rule_id')->constrained('rules');
             $table->foreignId('parent_id')->constrained('rules');
+            $table->foreignId('operator_id')->constrained('operators');
             $table->timestamps();
         });
     }
