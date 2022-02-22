@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AllRoutes from './routes/AllRoutes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="flex w-full h-full">
+      <AllRoutes />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

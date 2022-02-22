@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function Sidebar() {
@@ -10,19 +11,24 @@ function Sidebar() {
         <div className="top-0 left-0 w-[20vw] bg-indigo-900 p-10 fixed h-full z-5">
 
           <div className="flex text-center align-middle justify-center">
-            <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
-          </div>
+            <Link to="/">
+              <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+            </Link>          </div>
 
           <div className="flex text-center align-middle justify-center">
-            <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
-          </div>
+            <Link to="/">
+              <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+            </Link>          </div>
 
           <div className="flex text-center align-middle justify-center">
-            <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
-          </div>
+            <Link to="/">
+              <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+            </Link>          </div>
 
           <div className="flex text-center align-middle justify-center">
-            <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+            <Link to="/">
+              <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+            </Link>
           </div>
 
         </div>
@@ -40,11 +46,15 @@ function Sidebar() {
               </div>
 
               <div className="flex text-center align-middle justify-center">
-                <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+                <Link to="/">
+                  <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+                </Link>
               </div>
 
               <div className="flex text-center align-middle justify-center">
-                <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+                <Link to="/">
+                  <h3 className="my-8 text-4xl font-semibold text-slate-200">I am a sidebar</h3>
+                </Link>
               </div>
             </div>
           </>
