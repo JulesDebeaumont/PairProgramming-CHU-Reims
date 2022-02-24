@@ -26,8 +26,8 @@ class CriteriaEditRequest extends FormRequest
         return [
             'name' => ['required', 'unique:criterias','min:2', 'max:255'],
             'value' => ['required', 'min:2', 'max:255'],
-            'term_id' => ['required', 'exists:terms.id'],
-            'operator_id' => ['required', 'exists:operators.id'],
+            'term_id' => ['required', 'exists:terms,id'],
+            'operator_id' => ['required', 'exists:operators,id'],
         ];
     }
 }

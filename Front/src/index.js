@@ -8,7 +8,7 @@ import { store } from './redux';
 
 ReactDOM.render(
   <Provider store={store}>
-    <div className="flex w-full h-full">
+    <div className="min-h-full bg-[#0E162A] ">
       <AllRoutes />
     </div>
   </Provider>,

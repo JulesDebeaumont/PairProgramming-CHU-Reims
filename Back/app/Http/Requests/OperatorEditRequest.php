@@ -25,7 +25,7 @@ class OperatorEditRequest extends FormRequest
     {
         return [
             'value' => ['required', 'unique:operators','min:2', 'max:255'],
-            'operator_type_id' => ['required', 'exists:operator_types.id']
+            'operator_type_id' => ['required', 'exists:operator_types,id']
         ];
     }
 }

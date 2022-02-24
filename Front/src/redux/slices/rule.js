@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const slice = createSlice({
-  name: 'rules',
+  name: 'rule',
   initialState,
   reducers: {
 
@@ -26,7 +26,7 @@ const slice = createSlice({
       const allRules = action.payload.data;
       if (allRules)
         allRules.forEach((rule) => {
-          state.rules[rule.rule_id] = rule;
+          state.rules[rule.id] = rule;
         });
       state.isLoading = false;
     },
@@ -42,7 +42,7 @@ const slice = createSlice({
     // Add/Update rule
     editRule(state, action) {
       const newRule = action.payload.data;
-      state.rules[newRule.rule_id] = newRule;
+      state.rules[newRule.id] = newRule;
       state.isLoading = false;
     },
 
@@ -50,7 +50,7 @@ const slice = createSlice({
     // Delete rule
     deleteRule(state, action) {
       const deletedRule = action.payload.data;
-      delete state.rules[deletedRule.rule_id];
+      delete state.rules[deletedRule.id];
       state.isLoading = false;
     },
   }
@@ -126,11 +126,11 @@ export function postRule(rule) {
 /**
  * Update rule
  */
-export function putInstitute(rule) {
+export function putRule(rule) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.put(`${rulesUrl}/${rule.rule_id}`, rule);
+      const response = await axios.put(`${rulesUrl}/${rule.id}`, rule);
       dispatch(slice.actions.editRule(response.data));
     } catch (error) {
       console.error(error.message);

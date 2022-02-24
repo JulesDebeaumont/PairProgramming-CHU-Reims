@@ -25,7 +25,7 @@ class TermEditRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:terms','min:2', 'max:255'],
-            'term_type_id' => ['required', 'exists:term_types.id']
+            'term_type_id' => ['required', 'exists:term_types,id']
         ];
     }
 }
