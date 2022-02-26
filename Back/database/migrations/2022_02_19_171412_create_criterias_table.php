@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('value');
-            $table->foreignId('term_id')->constrained('terms');
+            $table->foreignId('term_id')->constrained('terms')->onDelete('cascade');
             $table->foreignId('operator_id')->constrained('operators');
             $table->timestamps();
         });

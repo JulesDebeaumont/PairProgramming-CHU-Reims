@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from '../../utils/axios';
 
-// ----------------------------------------------------------------------
-
 const initialState = {
   isLoading: false,
   terms: {},
@@ -41,16 +39,16 @@ const slice = createSlice({
 
     // Add/Update term
     editTerm(state, action) {
-      const newTerm = action.payload;
-      state.terms[newTerm.id] = newTerm;
+      const editedTerm = action.payload;
+      state.terms[editedTerm.id] = editedTerm;
       state.isLoading = false;
     },
 
 
     // Delete term
     deleteTerm(state, action) {
-      const deletedTerm = action.payload;
-      delete state.terms[deletedTerm.id];
+      const deletedTermI = action.payload;
+      delete state.terms[deletedTermI];
       state.isLoading = false;
     },
   }
@@ -108,17 +106,13 @@ export function getRuleById(id) {
 
 
 /**
- * Post new term
+ * Post term
  */
 export function postTerm(term) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.post(termsUrl, term);
-      dispatch(slice.actions.editTerm(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.post(termsUrl, term);
+    dispatch(slice.actions.editTerm(response.data));
   };
 }
 
@@ -129,12 +123,8 @@ export function postTerm(term) {
 export function putTerm(term) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.put(`${termsUrl}/${term.id}`, term);
-      dispatch(slice.actions.editTerm(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.put(`${termsUrl}/${term.id}`, term);
+    dispatch(slice.actions.editTerm(response.data));
   };
 }
 

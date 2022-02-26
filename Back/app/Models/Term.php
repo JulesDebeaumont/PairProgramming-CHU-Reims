@@ -16,6 +16,7 @@ class Term extends Model
      */
     protected $fillable = [
         'name',
+        'term_type_id',
     ];
 
     public function type()

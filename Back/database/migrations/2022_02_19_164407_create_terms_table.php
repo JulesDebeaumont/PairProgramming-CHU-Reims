@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->foreignId('term_type_id')->constrained('term_types');
             $table->timestamps();
         });

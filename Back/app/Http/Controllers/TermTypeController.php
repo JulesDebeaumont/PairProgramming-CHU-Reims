@@ -55,7 +55,7 @@ class TermTypeController extends Controller
     {
         $termType->update($request->validated());
 
-        return response()->json();
+        return response()->json($termType);
     }
 
     /**
@@ -68,6 +68,6 @@ class TermTypeController extends Controller
     {
         $termType->delete();
 
-        return response()->json();
+        return response()->json($termType->id);
     }
 }

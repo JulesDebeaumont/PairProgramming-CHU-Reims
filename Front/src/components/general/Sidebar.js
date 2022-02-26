@@ -28,7 +28,7 @@ function Sidebar() {
 
           <div className="flex-1 text-indigo-200 flex flex-col justify-end align-middle text-center">
             <div className="hover:text-indigo-50 transition">
-              <a href="https://github.com/JulesDebeaumont/PairProgramming-CHU-Reims" target="_blank">
+              <a href="https://github.com/JulesDebeaumont/PairProgramming-CHU-Reims" target="_blank" rel="noreferrer">
                 <h4 className="text-2xl">Jules Debeaumont</h4>
                 <h5>Voir sur GitHub</h5>
               </a>

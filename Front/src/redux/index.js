@@ -1,4 +1,4 @@
-﻿import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import rule from './slices/rule';
 import term from './slices/term';
 

@@ -10,7 +10,7 @@ export default function useTermTypes() {
 
   useEffect(() => {
     getAllTermTypes();
-  }, []);
+  }, [getAllTermTypes]);
 
   return { termTypes };
 }

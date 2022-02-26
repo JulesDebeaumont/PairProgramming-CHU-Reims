@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TermEditRequest;
+use App\Http\Requests\TermPostRequest;
 use App\Models\Term;
 use Illuminate\Http\Request;
 
@@ -26,11 +27,11 @@ class TermController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TermEditRequest $request)
+    public function store(TermPostRequest $request)
     {
         $term = Term::create($request->validated());
 
-        return response()->json($term, 201);
+        return response()->json($term->load('type'), 201);
     }
 
     /**
@@ -55,7 +56,7 @@ class TermController extends Controller
     {
         $term->update($request->validated());
 
-        return response()->json();
+        return response()->json($term->load('type'));
     }
 
     /**
@@ -68,6 +69,6 @@ class TermController extends Controller
     {
         $term->delete();
 
-        return response()->json();
+        return response()->json($term->id);
     }
 }
