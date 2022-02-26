@@ -20,7 +20,14 @@ class CriteriaSeeder extends Seeder
             'name' => 'Être majeur',
             'term_id' => Term::where('name', 'Age')->first()->id,
             'operator_id' => Operator::where('value', '>')->first()->id,
-            'value' => '18',
+            'value' => '17',
+        ]);
+
+        DB::table('criterias')->insert([
+            'name' => 'Être un homme',
+            'term_id' => Term::where('name', 'Sexe')->first()->id,
+            'operator_id' => Operator::where('value', '=')->first()->id,
+            'value' => 'H',
         ]);
     }
 }

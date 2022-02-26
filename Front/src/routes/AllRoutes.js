@@ -6,7 +6,7 @@ import Loading from "../components/general/Loading";
 import Sidebar from '../components/general/Sidebar';
 
 const Dashboard = React.lazy(() => import('../components//dashboard/Dashboard'));
-const Rules = React.lazy(() => import('../components/rules/Rules'));
+const RulesList = React.lazy(() => import('../components/rules/RulesList'));
 const TermsList = React.lazy(() => import('../components/terms/TermsList'));
 
 const styles = {
@@ -53,7 +53,7 @@ export function AllRoutes() {
 
             <Route path="/rules" element={
               <React.Suspense fallback={<Loading />}>
-                <Rules />
+                <RulesList />
               </React.Suspense>
             } />
 

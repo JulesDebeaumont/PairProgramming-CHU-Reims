@@ -23,7 +23,7 @@ const slice = createSlice({
 
     // Store all rules
     getRulesSuccess(state, action) {
-      const allRules = action.payload.data;
+      const allRules = action.payload;
       if (allRules)
         allRules.forEach((rule) => {
           state.rules[rule.id] = rule;
@@ -34,14 +34,14 @@ const slice = createSlice({
 
     // Store rule by id
     getRuleSuccess(state, action) {
-      state.rule = action.payload.data;
+      state.rule = action.payload;
       state.isLoading = false;
     },
 
 
     // Add/Update rule
     editRule(state, action) {
-      const newRule = action.payload.data;
+      const newRule = action.payload;
       state.rules[newRule.id] = newRule;
       state.isLoading = false;
     },
@@ -49,7 +49,7 @@ const slice = createSlice({
 
     // Delete rule
     deleteRule(state, action) {
-      const deletedRule = action.payload.data;
+      const deletedRule = action.payload;
       delete state.rules[deletedRule.id];
       state.isLoading = false;
     },
@@ -113,12 +113,8 @@ export function getRuleById(id) {
 export function postRule(rule) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.post(rulesUrl, rule);
-      dispatch(slice.actions.editRule(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.post(rulesUrl, rule);
+    dispatch(slice.actions.editRule(response.data));
   };
 }
 
@@ -129,12 +125,8 @@ export function postRule(rule) {
 export function putRule(rule) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.put(`${rulesUrl}/${rule.id}`, rule);
-      dispatch(slice.actions.editRule(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.put(`${rulesUrl}/${rule.id}`, rule);
+    dispatch(slice.actions.editRule(response.data));
   };
 }
 
@@ -145,11 +137,7 @@ export function putRule(rule) {
 export function removeRule(id) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.delete(`${rulesUrl}/${id}`);
-      dispatch(slice.actions.deleteRule(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.delete(`${rulesUrl}/${id}`);
+    dispatch(slice.actions.deleteRule(response.data));
   };
 }

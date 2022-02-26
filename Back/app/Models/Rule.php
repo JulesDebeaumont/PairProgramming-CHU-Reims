@@ -9,7 +9,7 @@ class Rule extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -20,11 +20,17 @@ class Rule extends Model
 
     public function criterias()
     {
-        return $this->belongsToMany(Criteria::class, 'criterias')->using(CriteriaRule::class)->withPivot('operator_id');
+        return $this->belongsToMany(Criteria::class, 'criteria_rules')->using(CriteriaRule::class)
+            ->withPivot([
+                'operator_id'
+            ]);
     }
 
     public function rules()
     {
-        return $this->belongsToMany(Rule::class, 'rules')->using(RuleChildren::class)->withPivot('operator_id');
+        return $this->belongsToMany(Rule::class, 'rule_childrens')->using(RuleChildren::class)
+            ->withPivot([
+                'operator_id'
+            ]);
     }
 }

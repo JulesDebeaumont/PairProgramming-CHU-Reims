@@ -33,6 +33,9 @@ class Criteria extends Model
 
     public function rules()
     {
-        return $this->belongsToMany(Rule::class, 'rules')->using(CriteriaRule::class);
+        return $this->belongsToMany(Rule::class, 'criteria_rules')->using(CriteriaRule::class)
+            ->withPivot([
+                'operator_id'
+            ]);
     }
 }

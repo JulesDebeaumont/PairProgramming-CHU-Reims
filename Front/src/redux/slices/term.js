@@ -135,11 +135,7 @@ export function putTerm(term) {
 export function removeTerm(id) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.delete(`${termsUrl}/${id}`);
-      dispatch(slice.actions.deleteTerm(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.delete(`${termsUrl}/${id}`);
+    dispatch(slice.actions.deleteTerm(response.data));
   };
 }

@@ -10,6 +10,7 @@ import TermDisplay from './TermDisplay';
 function TermsList() {
   const dispatch = useDispatch();
   const { terms } = useSelector((state) => state.term);
+  const { isLoading } = useSelector((state) => state.term);
   const [termsEdit, setTermsEdit] = useState([]);
   const [newFormDisplay, setNewFormDisplay] = useState(false);
 
@@ -33,7 +34,7 @@ function TermsList() {
     setNewFormDisplay(!newFormDisplay);
   }
 
-  
+
   return (
     <>
       <div className="ml-3 mb-5">
@@ -57,6 +58,14 @@ function TermsList() {
               termsEdit={termsEdit}
             />
           ))}
+        </div>
+
+        <div>
+          {Object.values(terms).length == 0 && isLoading == false && (
+            <span>
+              Aucun terme
+            </span>
+          )}
         </div>
 
       </div>
