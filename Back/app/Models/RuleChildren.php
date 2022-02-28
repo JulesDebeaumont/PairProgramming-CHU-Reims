@@ -16,7 +16,7 @@ class RuleChildren extends Pivot
      */
     protected $fillable = [
         'operator_id',
-        'parent_id',
+        'child_id',
         'rule_id'
     ];
 

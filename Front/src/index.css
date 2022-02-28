@@ -18,6 +18,17 @@ body {
     height: 100%;
 }
 
+select {
+  @apply py-1 border border-gray-300 rounded text-black ;
+}
+input {
+  @apply py-1 border border-gray-300 rounded text-black !important;
+}
+
+input[type="date" i] {
+  @apply py-1 border border-gray-300 rounded !important;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
   }

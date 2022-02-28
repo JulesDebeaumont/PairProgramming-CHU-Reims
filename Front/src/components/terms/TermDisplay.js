@@ -32,7 +32,7 @@ function TermDisplay({ term, toggleEdit, termsEdit }) {
   
   return (
     <>
-      <div className="py-10" key={term.id}>
+      <div className="py-10">
 
         {termsEdit[term.id] === true ? (
           <TermForm term={term} toggleForm={toggleEdit} />

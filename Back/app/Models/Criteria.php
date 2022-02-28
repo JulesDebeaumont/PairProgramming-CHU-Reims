@@ -35,7 +35,7 @@ class Criteria extends Model
     {
         return $this->belongsToMany(Rule::class, 'criteria_rules')->using(CriteriaRule::class)
             ->withPivot([
-                'operator_id'
+                'operator_id',
             ]);
     }
 }

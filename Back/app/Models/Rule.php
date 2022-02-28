@@ -21,16 +21,16 @@ class Rule extends Model
     public function criterias()
     {
         return $this->belongsToMany(Criteria::class, 'criteria_rules')->using(CriteriaRule::class)
-            ->withPivot([
-                'operator_id'
-            ]);
+        ->withPivot([
+            'operator_id',
+        ]);
     }
 
-    public function rules()
+    public function subRules()
     {
-        return $this->belongsToMany(Rule::class, 'rule_childrens')->using(RuleChildren::class)
+        return $this->belongsToMany(Rule::class, 'rule_childrens', 'rule_id', 'child_id')->using(RuleChildren::class)
             ->withPivot([
-                'operator_id'
+                'operator_id',
             ]);
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique()->nullable();
             $table->string('value');
             $table->foreignId('term_id')->constrained('terms')->onDelete('cascade');
             $table->foreignId('operator_id')->constrained('operators');

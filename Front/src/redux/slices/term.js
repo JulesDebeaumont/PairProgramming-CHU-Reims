@@ -21,6 +21,7 @@ const slice = createSlice({
 
     // Store all terms
     getTermsSuccess(state, action) {
+      console.log(action.payload)
       const allTerms = action.payload;
       if (allTerms)
         allTerms.forEach((term) => {

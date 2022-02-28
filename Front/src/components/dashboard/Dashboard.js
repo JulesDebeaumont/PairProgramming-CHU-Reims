@@ -43,9 +43,9 @@ function Dashboard() {
             <li>- de définir les termes (Age, Sexe, Date de venue...) et leur type (Texte, numérique, date) dans un catalogue ✔</li> 
             <li>- d'afficher le catalogue des termes ✔</li>
             <li>- de modifier un terme ✔</li>
-            <li>- de créer une nouvelle règle composée d'une combinaison de critères avec des ET et des OU</li>
-            <li>- d'afficher la liste des règles</li>
-            <li> - de modifier une règle existante</li>
+            <li>- de créer une nouvelle règle composée d'une combinaison de critères avec des ET et des OU ✔</li>
+            <li>- d'afficher la liste des règles ✔</li>
+            <li> - de modifier une règle existante ✔</li>
           </ul>
         </div>
       </div>

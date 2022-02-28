@@ -16,12 +16,12 @@ class OperatorSeeder extends Seeder
     public function run()
     {
         DB::table('operators')->insert([
-            'value' => '&&',
+            'value' => 'ET',
             'operator_type_id' => OperatorType::where('name', 'Logical')->first()->id,
         ]);
 
         DB::table('operators')->insert([
-            'value' => '||',
+            'value' => 'OU',
             'operator_type_id' => OperatorType::where('name', 'Logical')->first()->id,
         ]);
 

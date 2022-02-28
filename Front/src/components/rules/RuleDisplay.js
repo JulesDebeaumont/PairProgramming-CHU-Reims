@@ -11,11 +11,11 @@ import RuleForm from './RuleForm';
 RuleDisplay.propTypes = {
   rule: PropTypes.object,
   toggleEdit: PropTypes.func,
-  termsEdit: PropTypes.array,
+  rulesEdit: PropTypes.array,
 };
 
 
-function RuleDisplay({ rule, toggleEdit, termsEdit }) {
+function RuleDisplay({ rule, toggleEdit, rulesEdit }) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -32,15 +32,15 @@ function RuleDisplay({ rule, toggleEdit, termsEdit }) {
   
   return (
     <>
-      <div className="py-10" key={rule.id}>
+      <div className="py-10">
 
-        {termsEdit[rule.id] === true ? (
-          <RuleForm term={rule} toggleForm={toggleEdit} />
+        {rulesEdit[rule.id] === true ? (
+          <RuleForm rule={rule} toggleForm={toggleEdit} />
         ) : (
-          <RuleInfo term={rule} />
+          <RuleInfo rule={rule} />
         )}
 
-        <button type="button" onClick={() => toggleEdit(rule.id)}>{termsEdit[rule.id] === true ? "Annuler" : "Editer"}</button>
+        <button type="button" onClick={() => toggleEdit(rule.id)}>{rulesEdit[rule.id] === true ? "Annuler" : "Editer"}</button>
         <button type="button" onClick={() => deleteTerm(rule.id)}>Supprimer</button>
       </div>
     </>

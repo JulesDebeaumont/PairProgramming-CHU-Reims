@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RuleEditRequest;
+use App\Http\Requests\RulePostRequest;
+use App\Models\Criteria;
 use App\Models\Rule;
 use Illuminate\Http\Request;
 
@@ -15,13 +17,12 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $rules = Rule::with(
-            'criterias', 
-            'criterias.term', 
-            'criterias.operator', 
-            'criterias.operator.type', 
-            'criterias.term.type', 
-            'rules',
+        $rules = Rule::whereHas('subRules')->with(
+            'subRules',
+            'subRules.criterias',
+            'subRules.criterias.term',
+            'subRules.criterias.operator',
+            'subRules.criterias.term',
         )->get();
 
         return response()->json($rules);
@@ -33,11 +34,46 @@ class RuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RuleEditRequest $request)
+    public function store(RulePostRequest $request)
     {
-        $rule = Rule::create($request->validated());
+        $attributes = $request->validated();
 
-        return response()->json($rule, 201);
+        $rule = new Rule();
+        $rule->setAttribute('name', $attributes['name']);
+        $rule->save();
+
+        $subRulesPivot = [];
+
+        foreach ($attributes['sub_rules'] as $subRule) {
+            $newSubRule = new Rule();
+            $newSubRule->save();
+            $criteriasPivot = [];
+
+            foreach ($subRule['criterias'] as $criteria) {
+                $newCriteria = new Criteria();
+                $newCriteria->setAttribute('term_id', $criteria['term_id']);
+                $newCriteria->setAttribute('operator_id', $criteria['operator_id']);
+                $newCriteria->setAttribute('value', $criteria['value']);
+                $newCriteria->save();
+
+                $criteriasPivot[$newCriteria['id']] = ['operator_id' => $criteria['pivot']['operator_id']];
+            }
+
+            $newSubRule->criterias()->sync($criteriasPivot);
+            $subRulesPivot[$newSubRule['id']] = [
+                'operator_id' => $subRule['pivot']['operator_id'],
+                'child_id' => $newSubRule->id,
+            ];
+        }
+        $rule->subRules()->sync($subRulesPivot);
+
+        return response()->json($rule->load(
+            'subRules',
+            'subRules.criterias',
+            'subRules.criterias.term',
+            'subRules.criterias.operator',
+            'subRules.criterias.term',
+        ), 201);
     }
 
     /**
@@ -48,14 +84,13 @@ class RuleController extends Controller
      */
     public function show(Rule $rule)
     {
-        return response()->json($rule->with(
-            'criterias', 
-            'criterias.term', 
-            'criterias.operator', 
-            'criterias.operator.type', 
-            'criterias.term.type', 
-            'rules',
-        )->get());
+        return response()->json($rule->load(
+            'subRules',
+            'subRules.criterias',
+            'subRules.criterias.term',
+            'subRules.criterias.operator',
+            'subRules.criterias.term',
+        ));
     }
 
     /**
@@ -67,9 +102,54 @@ class RuleController extends Controller
      */
     public function update(RuleEditRequest $request, Rule $rule)
     {
-        $rule->update($request->validated());
+        $attributes = $request->validated();
+        
+        $rule->setAttribute('name', $attributes['name']);
 
-        return response()->json();
+        $subRulesPivot = [];
+
+        foreach ($attributes['sub_rules'] as $subRule) {
+            if (isset($subRule['id'])) {
+                $editedSubRule = Rule::find($subRule['id']);
+            } else {
+                $editedSubRule = new Rule();
+                $editedSubRule->save();
+            }
+
+            $criteriasPivot = [];
+
+            foreach ($subRule['criterias'] as $criteria) {
+                if (isset($criteria['id'])) {
+                    $editedCriteria = Criteria::find($criteria['id']);
+                    $editedCriteria->setAttribute('term_id', $criteria['term_id']);
+                    $editedCriteria->setAttribute('operator_id', $criteria['operator_id']);
+                    $editedCriteria->setAttribute('value', $criteria['value']);
+                } else {
+                    $editedCriteria = new Criteria();
+                    $editedCriteria->setAttribute('term_id', $criteria['term_id']);
+                    $editedCriteria->setAttribute('operator_id', $criteria['operator_id']);
+                    $editedCriteria->setAttribute('value', $criteria['value']);
+                    $editedCriteria->save();
+                }
+
+                $criteriasPivot[$editedCriteria['id']] = ['operator_id' => $criteria['pivot']['operator_id']];
+            }
+
+            $editedSubRule->criterias()->sync($criteriasPivot);
+            $subRulesPivot[$editedSubRule['id']] = [
+                'operator_id' => $subRule['pivot']['operator_id'],
+                'child_id' => $editedSubRule->id,
+            ];
+        }
+        $rule->subRules()->sync($subRulesPivot);
+
+        return response()->json($rule->load(
+            'subRules',
+            'subRules.criterias',
+            'subRules.criterias.term',
+            'subRules.criterias.operator',
+            'subRules.criterias.term',
+        ));
     }
 
     /**

@@ -15,7 +15,7 @@ TermForm.propTypes = {
 };
 
 
-function TermForm({ term = {}, toggleForm = () => {} }) {
+function TermForm({ term, toggleForm = () => {} }) {
   const dispatch = useDispatch();
   const { termTypes } = useTermTypes();
   const { enqueueSnackbar } = useSnackbar();
@@ -29,14 +29,14 @@ function TermForm({ term = {}, toggleForm = () => {} }) {
     validateOnChange: false,
     enableReinitialize: true,
     initialValues: {
-      id: term.id ?? '',
+      id: term.id ?? null,
       name: term.name ?? '',
       term_type_id: term.term_type_id ?? '',
     },
     validationSchema: TermSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
-        if (values.id === '') {
+        if (values.id === null) {
           await dispatch(postTerm(values));
           resetForm();
           setSubmitting(false);
@@ -50,7 +50,15 @@ function TermForm({ term = {}, toggleForm = () => {} }) {
           enqueueSnackbar('Changement effectué', { variant: 'success' });
         }
       } catch (error) {
-        enqueueSnackbar('Une erreur est survenue', { variant: 'error' });
+        switch (error.message) {
+          case "The name has already been taken.":
+            enqueueSnackbar("Le nom est déjà pris.", { variant: 'warning' });
+            break;
+
+          default:
+            enqueueSnackbar('Une erreur est survenue', { variant: 'error' });
+            break;
+        }
         console.error(error);
         setSubmitting(false);
       }
@@ -68,7 +76,7 @@ function TermForm({ term = {}, toggleForm = () => {} }) {
             id="name"
             name="name"
             type="text"
-            placeholder="Age.."
+            placeholder="Nom"
             onChange={handleChange}
             value={values.name}
           />

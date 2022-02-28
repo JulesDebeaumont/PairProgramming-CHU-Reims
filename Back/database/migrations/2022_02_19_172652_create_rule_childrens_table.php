@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('rule_childrens', function (Blueprint $table) {
             $table->id();
-            $table->string('operator')->default('&&');
             $table->foreignId('rule_id')->constrained('rules');
-            $table->foreignId('parent_id')->constrained('rules');
+            $table->foreignId('child_id')->constrained('rules');
             $table->foreignId('operator_id')->constrained('operators');
             $table->timestamps();
         });

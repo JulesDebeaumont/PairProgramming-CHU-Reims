@@ -31,6 +31,14 @@ class TermSeeder extends Seeder
             'term_type_id' => TermType::where('name', 'DateTime')->first()->id,
         ]);
 
-        // Term::factory()->count(40)->create();
+        DB::table('terms')->insert([
+            'name' => 'Nom',
+            'term_type_id' => TermType::where('name', 'String')->first()->id,
+        ]);
+
+        DB::table('terms')->insert([
+            'name' => 'Taille',
+            'term_type_id' => TermType::where('name', 'Int')->first()->id,
+        ]);
     }
 }

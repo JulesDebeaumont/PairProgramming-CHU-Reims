@@ -29,5 +29,26 @@ class CriteriaSeeder extends Seeder
             'operator_id' => Operator::where('value', '=')->first()->id,
             'value' => 'H',
         ]);
+
+        DB::table('criterias')->insert([
+            'name' => 'Être une femme',
+            'term_id' => Term::where('name', 'Sexe')->first()->id,
+            'operator_id' => Operator::where('value', '=')->first()->id,
+            'value' => 'F',
+        ]);
+
+        DB::table('criterias')->insert([
+            'name' => "S'appeler Didier",
+            'term_id' => Term::where('name', 'Nom')->first()->id,
+            'operator_id' => Operator::where('value', '=')->first()->id,
+            'value' => 'Didier',
+        ]);
+
+        DB::table('criterias')->insert([
+            'name' => 'Mesurer plus de 180cm',
+            'term_id' => Term::where('name', 'Taille')->first()->id,
+            'operator_id' => Operator::where('value', '>')->first()->id,
+            'value' => '180',
+        ]);
     }
 }

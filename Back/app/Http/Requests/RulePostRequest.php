@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use App\Rules\isComparisonOperator;
 use App\Rules\isLogicalOperator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class RuleEditRequest extends FormRequest
+class RulePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +26,12 @@ class RuleEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['max:255', Rule::unique('rules', 'name')->ignore($this->rule)],
-            'sub_rules' => ['required', 'array','min:1'],
-            'sub_rules.*.id' => ['integer','min:1', 'exists:rules,id'],
+            'name' => ['max:255', 'unique:rules,name'],
+            'sub_rules' => ['required', 'array', 'min:1'],
+            'sub_rules.*.id' => ['integer', 'min:1', 'exists:rules,id'],
             'sub_rules.*.pivot.operator_id' => ['required', new isLogicalOperator],
             'sub_rules.*.criterias' => ['required', 'array', 'min:1'],
-            'sub_rules.*.criterias.*.id' => ['integer','min:1', 'exists:criterias,id'],
+            'sub_rules.*.criterias.*.id' => ['integer', 'min:1', 'exists:criterias,id'],
             'sub_rules.*.criterias.*.operator_id' => ['required', new isComparisonOperator],
             'sub_rules.*.criterias.*.pivot.operator_id' => ['required', new isLogicalOperator],
             'sub_rules.*.criterias.*.term_id' => ['required', 'exists:terms,id'],

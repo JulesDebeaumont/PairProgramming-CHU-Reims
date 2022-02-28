@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TermEditRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class TermEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:2', 'max:255'],
+            'id' => ['required', 'exists:terms,id'],
+            'name' => ['required', Rule::unique('terms', 'name')->ignore($this->term), 'min:2', 'max:255'],
             'term_type_id' => ['required', 'exists:term_types,id']
         ];
     }
