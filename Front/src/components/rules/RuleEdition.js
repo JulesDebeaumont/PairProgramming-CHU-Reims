@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRuleById, resetRuleSingle, startLoading } from '../../redux/slices/rule';
 // components
 import RuleForm from './RuleForm';
+import LoadingSpin from '../general/LoadingSpin';
 
 function RuleEdition() {
   const dispatch = useDispatch();
@@ -43,7 +44,11 @@ function RuleEdition() {
         <div className="flex flex-col">
           <div className=" p-3 flex w-full justify-center">
             <div>
-              <RuleForm rule={rule} submitForm={() => navigate('/rules')} />
+              {isLoading ? (
+                <LoadingSpin />
+              ) : (
+                <RuleForm rule={rule} submitForm={() => navigate('/rules')} />
+              )}
             </div>
           </div>
         </div>

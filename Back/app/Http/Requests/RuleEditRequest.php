@@ -27,7 +27,8 @@ class RuleEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['max:255', Rule::unique('rules', 'name')->ignore($this->rule)],
+            // 'name' => ['max:255', Rule::unique('rules', 'name')->ignore($this->rule)],
+            'name' => ['max:255'],
             'sub_rules' => ['required', 'array','min:1'],
             'sub_rules.*.id' => ['integer','min:1', 'exists:rules,id'],
             'sub_rules.*.pivot.operator_id' => ['required', new isLogicalOperator],

@@ -62,7 +62,7 @@ function RuleForm({ rule, submitForm = () => { } }) {
     },
     validationSchema: RuleSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const copyValues = { ... values };
+      const copyValues = { ...values };
       if (values.name === "") {
         copyValues.name = null;
       }
@@ -96,7 +96,7 @@ function RuleForm({ rule, submitForm = () => { } }) {
     }
   });
 
-  const { errors, values, handleSubmit, isSubmitting, handleChange } = formik;
+  const { errors, values, handleSubmit, isSubmitting } = formik;
 
   const defaultCriteria = {
     pivot: {
@@ -256,7 +256,7 @@ function RuleForm({ rule, submitForm = () => { } }) {
                                             <div className="mx-1 my-1 sm:my-0 w-full">
                                               <Field
                                                 name={`sub_rules[${index}].criterias[${subIndex}].value`}
-                                                type={Object.values(terms)[values.sub_rules[index].criterias[subIndex]?.term_id -1]?.input_type ?? 'text'}
+                                                type={Object.values(terms).filter((term) => (term.id == values.sub_rules[index].criterias[subIndex]?.term_id))[0]?.input_type ?? 'text'}
                                                 placeholder="Valeur.."
                                                 className="w-full"
                                               />
