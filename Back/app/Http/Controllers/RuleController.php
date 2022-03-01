@@ -90,6 +90,12 @@ class RuleController extends Controller
      */
     public function show(Rule $rule)
     {
+        if ($rule->subRules->isEmpty()) {
+            return response()->json([
+                'message' => 'This rules doesnt have any subRules.'
+            ], 404);
+        }
+
         return response()->json($rule->load(
             'subRules',
             'subRuleOperators',

@@ -10,7 +10,7 @@ export async function getOperators() {
     const response = await axios.get(operatorsUrl);
     return response.data;
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 }
 

@@ -10,6 +10,8 @@ import { putRule, postRule } from '../../redux/slices/rule';
 import { getTerms } from '../../redux/slices/term';
 // hooks
 import useOperators from '../../hooks/useOperators';
+// components
+import LoadingSpin from '../general/LoadingSpin';
 
 
 RuleForm.propTypes = {
@@ -29,7 +31,7 @@ function RuleForm({ rule, submitForm = () => { } }) {
   }, [dispatch]);
 
   const RuleSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Le nom est trop court.').max(255, 'Le nom est trop grand'),
+    name: Yup.string().nullable().min(2, 'Le nom est trop court.').max(255, 'Le nom est trop grand'),
     sub_rules: Yup.array().required('Au moins une règle est requise').min(1, 'Au moins une règle est requise')
       .of(
         Yup.object().shape({
@@ -56,27 +58,23 @@ function RuleForm({ rule, submitForm = () => { } }) {
     enableReinitialize: true,
     initialValues: rule ?? {
       id: null,
-      name: '',
-      sub_rules: [{
-        0: {
-          pivot: {
-            operator_id: '1',
-          }
-        }
-      }]
+      name: ''
     },
     validationSchema: RuleSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      console.log(values);
+      const copyValues = { ... values };
+      if (values.name === "") {
+        copyValues.name = null;
+      }
       try {
         if (values.id === null) {
-          await dispatch(postRule(values));
+          await dispatch(postRule(copyValues));
           resetForm();
           setSubmitting(false);
           enqueueSnackbar('Nouvelle règle créer', { variant: 'success' });
           submitForm();
         } else {
-          await dispatch(putRule(values));
+          await dispatch(putRule(copyValues));
           resetForm();
           setSubmitting(false);
           enqueueSnackbar('Changement effectué', { variant: 'success' });
@@ -258,12 +256,12 @@ function RuleForm({ rule, submitForm = () => { } }) {
                                             <div className="mx-1 my-1 sm:my-0 w-full">
                                               <Field
                                                 name={`sub_rules[${index}].criterias[${subIndex}].value`}
-                                                type="text"
+                                                type={Object.values(terms)[values.sub_rules[index].criterias[subIndex]?.term_id -1]?.input_type ?? 'text'}
                                                 placeholder="Valeur.."
                                                 className="w-full"
                                               />
                                               <ErrorMessage name={`sub_rules[${index}].criterias[${subIndex}].value`} />
-                                            </div> {/* TODO CHANGE TYPE DEPENDING ON TERM + Validation par type */}
+                                            </div>
                                           </div>
                                         </div>
 
@@ -353,13 +351,17 @@ function RuleForm({ rule, submitForm = () => { } }) {
             />
 
             <div className="flex justify-center mt-4 text-lg">
-              <button
+              {isSubmitting === false ? (<button
                 className="text-sky-300 mx-2 hover:text-sky-400 hover:scale-105 transition"
                 type="submit"
-                disabled={isSubmitting}
               >
                 Enregistrer
               </button>
+              ) : (
+                <button className="ml-5">
+                  <LoadingSpin />
+                </button>
+              )}
 
               <button
                 className="text-indigo-300 mx-2 hover:text-indigo-400 hover:scale-105 transition"

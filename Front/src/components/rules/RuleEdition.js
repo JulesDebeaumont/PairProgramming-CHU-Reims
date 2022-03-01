@@ -7,16 +7,23 @@ import { getRuleById, resetRuleSingle, startLoading } from '../../redux/slices/r
 import RuleForm from './RuleForm';
 
 function RuleEdition() {
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const { rule, isLoading } = useSelector((state) => state.rule);
 
+  const getRule = async (id) => {
+    try {
+      await dispatch(getRuleById(id));
+    } catch (error) {
+      console.error(error.message);
+      navigate('/page404')
+    }
+  };
+
   useEffect(() => {
     if (id !== undefined) {
-      dispatch(getRuleById(id));
+      getRule(id);
     } else {
       dispatch(startLoading());
       dispatch(resetRuleSingle());

@@ -6,7 +6,8 @@ import axios from '../../utils/axios';
 const initialState = {
   isLoading: false,
   rules: {},
-  rule: null
+  rule: null,
+  error: null,
 };
 
 
@@ -118,12 +119,8 @@ export function getRules() {
 export function getRuleById(id) {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
-    try {
-      const response = await axios.get(`${rulesUrl}/${id}`);
-      dispatch(slice.actions.getRuleSuccess(response.data));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const response = await axios.get(`${rulesUrl}/${id}`);
+    dispatch(slice.actions.getRuleSuccess(response.data));
   };
 }
 

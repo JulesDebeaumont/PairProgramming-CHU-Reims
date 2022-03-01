@@ -7,6 +7,7 @@ import { getRules, removeRule } from '../../redux/slices/rule';
 // components
 import RuleDisplay from './RuleDisplay';
 import Modal from '../general/Modal';
+import LoadingSpin from '../general/LoadingSpin';
 
 
 function RulesList() {
@@ -63,15 +64,21 @@ function RulesList() {
           </div>
         </Link>
 
-        <div className="flex flex-col">
-          {Object.values(rules).map((rule) => (
-            <RuleDisplay
-              key={rule.id}
-              rule={rule}
-              setSelectedForDelete={setSelectedForDelete}
-            />
-          ))}
-        </div>
+        {isLoading === true ? (
+          <LoadingSpin />
+        ) : (
+          <>
+            <div className="flex flex-col">
+              {Object.values(rules).map((rule) => (
+                <RuleDisplay
+                  key={rule.id}
+                  rule={rule}
+                  setSelectedForDelete={setSelectedForDelete}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         <div>
           {Object.values(rules).length == 0 && isLoading == false && (

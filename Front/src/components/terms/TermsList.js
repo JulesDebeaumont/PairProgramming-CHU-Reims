@@ -7,12 +7,11 @@ import { getTerms, removeTerm } from '../../redux/slices/term';
 import TermForm from './TermForm';
 import TermDisplay from './TermDisplay';
 import Modal from '../general/Modal';
-
+import LoadingSpin from '../general/LoadingSpin';
 
 function TermsList() {
   const dispatch = useDispatch();
-  const { terms } = useSelector((state) => state.term);
-  const { isLoading } = useSelector((state) => state.term);
+  const { terms, isLoading } = useSelector((state) => state.term);
   const [termsEdit, setTermsEdit] = useState([]);
   const [newFormDisplay, setNewFormDisplay] = useState(false);
   const [selectedForDelete, setSelectedForDelete] = useState(null);
@@ -71,7 +70,7 @@ function TermsList() {
           {newFormDisplay === true && (
             <div className="flex flex-col py-5 mb-10">
               <div className="text-xl sm:ml-4">Nouveau terme</div>
-              <TermForm toggleForm={toggleNew} />
+              <TermForm submitForm={toggleNew} />
             </div>
           )}
           <div onClick={() => toggleNew()}>{newFormDisplay === false && (
@@ -84,26 +83,32 @@ function TermsList() {
           )}</div>
         </div>
 
-        <div className="flex flex-col">
-          {Object.values(terms).map((term) => (
-            <TermDisplay
-              key={term.id}
-              term={term}
-              toggleEdit={toggleEdit}
-              termsEdit={termsEdit}
-              setSelectedForDelete={setSelectedForDelete}
-            />
-          ))}
-        </div>
+        {isLoading === true ? (
+          <LoadingSpin />
+        ) : (
+          <>
+            <div className="flex flex-col">
+              {Object.values(terms).map((term) => (
+                <TermDisplay
+                  key={term.id}
+                  term={term}
+                  toggleEdit={toggleEdit}
+                  termsEdit={termsEdit}
+                  setSelectedForDelete={setSelectedForDelete}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         <div>
-          {Object.values(terms).length == 0 && isLoading == false && (
+          {Object.values(terms).length == 0 && isLoading == false ? (
             <div className="text-lg text-center sm:text-left sm:ml-5">
               <span>
                 Aucun terme
               </span>
             </div>
-          )}
+          ) : null}
         </div>
 
       </div>

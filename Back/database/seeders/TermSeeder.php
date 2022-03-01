@@ -18,27 +18,30 @@ class TermSeeder extends Seeder
     {
         DB::table('terms')->insert([
             'name' => 'Age',
-            'term_type_id' => TermType::where('name', 'Int')->first()->id,
+            'term_type_id' => TermType::where('name', 'integer')->first()->id,
+            'input_type' => 'number'
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Sexe',
-            'term_type_id' => TermType::where('name', 'String')->first()->id,
+            'term_type_id' => TermType::where('name', 'string')->first()->id,
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Date de venue',
-            'term_type_id' => TermType::where('name', 'DateTime')->first()->id,
+            'term_type_id' => TermType::where('name', 'string')->first()->id,
+            'input_type' => 'date'
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Nom',
-            'term_type_id' => TermType::where('name', 'String')->first()->id,
+            'term_type_id' => TermType::where('name', 'string')->first()->id,
         ]);
 
         DB::table('terms')->insert([
             'name' => 'Taille',
-            'term_type_id' => TermType::where('name', 'Int')->first()->id,
+            'term_type_id' => TermType::where('name', 'integer')->first()->id,
+            'input_type' => 'number'
         ]);
     }
 }

@@ -8,13 +8,13 @@ function Sidebar() {
     <>
       {/* Sidebar */}
       <div className="hidden lg:flex">
-        <div className="top-0 left-0 w-[20vw] xl:w-[15vw] bg-[#1f294b] p-5 fixed h-full z-5 text-neutral-200 flex flex-col shadow-2xl">
+        <div className="top-0 left-0 w-[20vw] xl:w-[15vw] bg-[#2f3747] p-5 fixed h-full z-5 text-neutral-200 flex flex-col shadow-2xl">
 
           <Link to="/dashboard">
-            <h2 className="text-center mt-10 mb-16 text-2xl 2xl:text-3xl font-bold text-neutral-100 hover:text-sky-100 transition">Pair Programming</h2>
+            <h2 className="text-center mt-10 mb-16 text-2xl 2xl:text-3xl font-bold text-neutral-100 hover:text-slate-50 transition">Pair Programming</h2>
           </Link>
 
-          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition">
+          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61] hover:text-slate-50 rounded transition">
             <Link to="/dashboard">
               <h3 className=" text-3xl font-semibold flex justify-center align-middle py-6">
                 <span className="material-icons md-30 mt-1 mr-3">
@@ -25,7 +25,7 @@ function Sidebar() {
             </Link>
           </div>
 
-          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition">
+          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61] hover:text-slate-50 rounded transition">
             <Link to="/terms">
               <h3 className=" text-3xl font-semibold flex justify-center align-middle py-6">
                 <span className="material-icons md-30 mt-1 mr-3">
@@ -36,7 +36,7 @@ function Sidebar() {
             </Link>
           </div>
 
-          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition">
+          <div className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61] hover:text-slate-50 rounded transition">
             <Link to="/rules">
               <h3 className=" text-3xl font-semibold flex justify-center align-middle py-6">
                 <span className="material-icons md-30 mt-1 mr-3">
@@ -64,7 +64,7 @@ function Sidebar() {
       <div className="flex lg:hidden">
         {isOpen ? (
           <>
-            <div className={`border-collapse text-neutral-200 top-0 left-0 bg-[#1f294b] p-5 pb-10 fixed w-full z-5 transition ease-in-out duration-300`}>
+            <div className={`border-collapse text-neutral-200 top-0 left-0 bg-[#2f3747] p-5 pb-10 fixed w-full z-5 transition ease-in-out duration-300`}>
 
               <div className="mb-10 flex justify-between">
 
@@ -81,7 +81,7 @@ function Sidebar() {
               </div>
 
               <div
-                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition"
+                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61 rounded transition"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Link to="/dashboard" className="w-full">
@@ -95,7 +95,7 @@ function Sidebar() {
               </div>
 
               <div
-                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition"
+                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61 rounded transition"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Link to="/terms" className="w-full">
@@ -109,7 +109,7 @@ function Sidebar() {
               </div>
 
               <div
-                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#566483] rounded transition"
+                className="flex text-center align-middle justify-center border-y border-slate-600 hover:bg-[#474d61 rounded transition"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Link to="/rules" className="w-full">

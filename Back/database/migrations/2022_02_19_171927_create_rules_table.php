@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->nullable();
+            $table->string('name')->nullable()->unique();
             $table->timestamps();
         });
     }

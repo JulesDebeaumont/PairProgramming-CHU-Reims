@@ -10,7 +10,7 @@ export async function getTermTypes() {
     const response = await axios.get(termTypesUrl);
     return response.data;
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 }
 

@@ -16,23 +16,35 @@ class TermTypeSeeder extends Seeder
     public function run()
     {
         DB::table('term_types')->insert([
-            'name' => 'String',
+            'name' => 'boolean',
         ]);
 
         DB::table('term_types')->insert([
-            'name' => 'Int',
+            'name' => 'integer',
         ]);
 
         DB::table('term_types')->insert([
-            'name' => 'Float',
+            'name' => 'double',
         ]);
 
         DB::table('term_types')->insert([
-            'name' => 'Boolean',
+            'name' => 'string',
         ]);
 
         DB::table('term_types')->insert([
-            'name' => 'DateTime',
+            'name' => 'array',
+        ]);
+
+        DB::table('term_types')->insert([
+            'name' => 'object',
+        ]);
+
+        DB::table('term_types')->insert([
+            'name' => 'resource',
+        ]);
+
+        DB::table('term_types')->insert([
+            'name' => 'unknown type',
         ]);
     }
 }

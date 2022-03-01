@@ -42,9 +42,9 @@ function RuleInfo({ rule }) {
             <div><b>Notation 2 :</b>
               {rule.sub_rules.map((subRule, key) => (
                 <span key={subRule.id}>
-                  {Object.values(rule.sub_rules)[key - 1]?.pivot.operator.value !== subRule.pivot.operator.value && (
+                  {Object.values(rule.sub_rules)[key - 1]?.pivot.operator.value !== subRule.pivot.operator.value && Object.values(rule.sub_rules).length > 1 ? (
                     <div>{subRule.pivot.operator.value}</div>
-                  )}
+                  ) : null}
                   {Object.values(subRule.criterias).map((criteria, subKey) => (
                     <div key={criteria.id} className="ml-4">
                       {Object.values(subRule.criterias)[subKey - 1]?.pivot.operator.value !== criteria.pivot.operator.value && Object.values(subRule.criterias).length > 1 ? (

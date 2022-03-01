@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CriteriaValueMatchsTermType;
 use App\Rules\isComparisonOperator;
 use App\Rules\isLogicalOperator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -35,7 +36,7 @@ class RulePostRequest extends FormRequest
             'sub_rules.*.criterias.*.operator_id' => ['required', new isComparisonOperator],
             'sub_rules.*.criterias.*.pivot.operator_id' => ['required', new isLogicalOperator],
             'sub_rules.*.criterias.*.term_id' => ['required', 'exists:terms,id'],
-            'sub_rules.*.criterias.*.value' => ['required', 'min:1', 'max:255'],
+            'sub_rules.*.criterias.*.value' => ['required', 'min:1', 'max:255', new CriteriaValueMatchsTermType],
         ];
     }
 }
