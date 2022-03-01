@@ -5,16 +5,12 @@ import PageLayout from "../components/general/PageLayout";
 import Loading from "../components/general/Loading";
 import Sidebar from '../components/general/Sidebar';
 
-const Dashboard = React.lazy(() => import('../components//dashboard/Dashboard'));
-const RulesList = React.lazy(() => import('../components/rules/RulesList'));
-const TermsList = React.lazy(() => import('../components/terms/TermsList'));
 
-const styles = {
-  success: { backgroundColor: 'blue' },
-  error: { backgroundColor: 'purple' },
-  warning: { backgroundColor: 'orange' },
-  info: { backgroundColor: 'green' },
-};
+const Dashboard = React.lazy(() => import('../components//dashboard/Dashboard'));
+const TermsList = React.lazy(() => import('../components/terms/TermsList'));
+const RulesList = React.lazy(() => import('../components/rules/RulesList'));
+const RuleEdition = React.lazy(() => import('../components/rules/RuleEdition'));
+
 
 export function AllRoutes() {
   return (
@@ -26,12 +22,6 @@ export function AllRoutes() {
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
-        }}
-        classes={{
-          variantSuccess: styles.success,
-          variantError: styles.error,
-          variantWarning: styles.warning,
-          variantInfo: styles.info,
         }}
       >
         <PageLayout>
@@ -54,6 +44,18 @@ export function AllRoutes() {
             <Route path="/rules" element={
               <React.Suspense fallback={<Loading />}>
                 <RulesList />
+              </React.Suspense>
+            } />
+
+            <Route path="/rules/new" element={
+              <React.Suspense fallback={<Loading />}>
+                <RuleEdition />
+              </React.Suspense>
+            } />
+
+            <Route path="/rules/:id/edit" element={
+              <React.Suspense fallback={<Loading />}>
+                <RuleEdition />
               </React.Suspense>
             } />
 

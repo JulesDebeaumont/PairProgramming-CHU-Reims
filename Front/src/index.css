@@ -18,32 +18,51 @@ body {
     height: 100%;
 }
 
+
+/* Rule form */
+.next:hover + .subNext { 
+  @apply bg-slate-800;
+}
+
+
+/* Forms tailwind */
 select {
-  @apply py-1 border border-gray-300 rounded text-black ;
+  @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sky-500 transition;
 }
 input {
-  @apply py-1 border border-gray-300 rounded text-black !important;
+  @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sky-500 transition;
 }
 
 input[type="date" i] {
-  @apply py-1 border border-gray-300 rounded !important;
+  @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sky-500 transition;
 }
 
+
+/* ScrollBar */
 ::-webkit-scrollbar {
     width: 10px;
   }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  } 
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} 
+
+
+/* Notistack overwrite */
+.go1725278324 {
+  background-color: rgb(79, 158, 223) !important;
+}
+
+.go4215275574 {
+  background-color: rgb(133, 80, 219) !important;
+}
+
+
+/* Google Icons */
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-30 { font-size: 30px; }

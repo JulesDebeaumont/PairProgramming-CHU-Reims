@@ -10,6 +10,13 @@ class CriteriaRule extends Pivot
     use HasFactory;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'criteria_rules';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

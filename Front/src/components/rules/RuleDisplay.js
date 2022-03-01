@@ -1,47 +1,49 @@
 import PropTypes from 'prop-types';
-import { useSnackbar } from 'notistack';
-// redux
-import { useDispatch } from 'react-redux';
-import { removeTerm } from '../../redux/slices/term';
+import { Link } from "react-router-dom";
 // components
 import RuleInfo from './RuleInfo';
-import RuleForm from './RuleForm';
 
 
 RuleDisplay.propTypes = {
   rule: PropTypes.object,
-  toggleEdit: PropTypes.func,
-  rulesEdit: PropTypes.array,
+  setSelectedForDelete: PropTypes.func,
 };
 
 
-function RuleDisplay({ rule, toggleEdit, rulesEdit }) {
-  const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
-
-  const deleteTerm = async (id) => {
-    try {
-      await dispatch(removeTerm(id));
-      enqueueSnackbar('Terme supprimé', { variant: 'success' });
-    } catch (error) {
-      enqueueSnackbar("Une erreur est survenue", { variant: 'error' });
-      console.error(error);
-    }
-  };
-
-  
+function RuleDisplay({ rule, setSelectedForDelete }) {
   return (
     <>
-      <div className="py-10">
+      <div className="hover:bg-slate-800 bg-slate-900 p-3 border-y border-slate-800 rounded flex w-full justify-between">
 
-        {rulesEdit[rule.id] === true ? (
-          <RuleForm rule={rule} toggleForm={toggleEdit} />
-        ) : (
+        <div>
           <RuleInfo rule={rule} />
-        )}
+        </div>
 
-        <button type="button" onClick={() => toggleEdit(rule.id)}>{rulesEdit[rule.id] === true ? "Annuler" : "Editer"}</button>
-        <button type="button" onClick={() => deleteTerm(rule.id)}>Supprimer</button>
+        <div className="flex">
+
+          <button className="text-indigo-300 mx-1 hover:text-indigo-400 transition hover:scale-125">
+            <Link to={`/rules/${rule.id}/edit`}>
+              <div className="flex">
+                <span className="material-icons">
+                  edit
+                </span>
+              </div>
+            </Link>
+          </button>
+
+          <button
+            className="text-purple-300 mx-1 hover:text-purple-400 transition hover:scale-125"
+            type="button"
+            onClick={() => setSelectedForDelete(rule.id)}>
+            <div className="flex">
+              <span className="material-icons">
+                delete
+              </span>
+            </div>
+          </button>
+
+        </div>
+
       </div>
     </>
   );

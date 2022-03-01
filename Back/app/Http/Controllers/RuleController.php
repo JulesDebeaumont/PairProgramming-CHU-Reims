@@ -17,13 +17,16 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $rules = Rule::whereHas('subRules')->with(
+        $rules = Rule::whereHas('subRules')->with([
             'subRules',
+            'subRuleOperators',
             'subRules.criterias',
+            'subRules.criteriaOperators',
+            'subRules.criterias.operator',
             'subRules.criterias.term',
             'subRules.criterias.operator',
             'subRules.criterias.term',
-        )->get();
+        ])->orderBy('created_at', 'ASC')->get();
 
         return response()->json($rules);
     }
@@ -69,7 +72,10 @@ class RuleController extends Controller
 
         return response()->json($rule->load(
             'subRules',
+            'subRuleOperators',
             'subRules.criterias',
+            'subRules.criteriaOperators',
+            'subRules.criterias.operator',
             'subRules.criterias.term',
             'subRules.criterias.operator',
             'subRules.criterias.term',
@@ -86,7 +92,10 @@ class RuleController extends Controller
     {
         return response()->json($rule->load(
             'subRules',
+            'subRuleOperators',
             'subRules.criterias',
+            'subRules.criteriaOperators',
+            'subRules.criterias.operator',
             'subRules.criterias.term',
             'subRules.criterias.operator',
             'subRules.criterias.term',
@@ -145,7 +154,10 @@ class RuleController extends Controller
 
         return response()->json($rule->load(
             'subRules',
+            'subRuleOperators',
             'subRules.criterias',
+            'subRules.criteriaOperators',
+            'subRules.criterias.operator',
             'subRules.criterias.term',
             'subRules.criterias.operator',
             'subRules.criterias.term',
@@ -162,6 +174,6 @@ class RuleController extends Controller
     {
         $rule->delete();
 
-        return response()->json();
+        return response()->json($rule->id);
     }
 }

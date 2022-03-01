@@ -19,9 +19,9 @@ function Dashboard() {
 
           <p className="mb-5">Exemple à un deux niveaux :</p>
           <ul className="ml-5 mb-14">
-            <li>(Age &lt; 10 ET Sexe = F) OU (Age &gt; 50 ET Date de venue = 8/1/2020)</li>
+            <li className="text-sky-200">(Age &lt; 10 ET Sexe = F) OU (Age &gt; 50 ET Date de venue = 8/1/2020)</li>
             <p className="my-5">qu'on peut aussi écrire :</p>
-            <ul>
+            <ul className="text-indigo-200">
               <li>OU</li>
               <ul className="ml-5">
                 <li>ET</li>

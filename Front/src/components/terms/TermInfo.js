@@ -9,9 +9,9 @@ function TermInfo({ term }) {
   return (
     <>
       <div>
-        <h3>Nom : {term.name}</h3>
-        <h3>Type : {term.type.name}</h3>
-        {term.updated_at && (<h3>Editer le : {new Date(term.updated_at).toLocaleString('fr').replace(',', ' à')}</h3>)}
+        <div><b>Nom : </b>{term.name}</div>
+        <div><b>Type : </b>{term.type.name}</div>
+        {term.updated_at && (<div className="text-gray-400 italic text-sm mt-3">Editer le {new Date(term.updated_at).toLocaleString('fr').replace(',', ' à')} </div>)}
       </div>
     </>
   );

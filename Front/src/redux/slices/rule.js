@@ -9,6 +9,21 @@ const initialState = {
   rule: null
 };
 
+
+// Re Order Object for pivot relation
+function reOrderObject(rule) {
+  const copyRule = { ...rule };
+  copyRule.sub_rules.forEach((sub_rule, index) => {
+    sub_rule.pivot.operator = copyRule.sub_rule_operators[index];
+    sub_rule.criterias.forEach((criteria, subIndex) => {
+      criteria.pivot.operator = sub_rule.criteria_operators[subIndex];
+    })
+  });
+
+  return copyRule;
+}
+
+
 const slice = createSlice({
   name: 'rule',
   initialState,
@@ -26,7 +41,7 @@ const slice = createSlice({
       const allRules = action.payload;
       if (allRules)
         allRules.forEach((rule) => {
-          state.rules[rule.id] = rule;
+          state.rules[rule.id] = reOrderObject(rule);
         });
       state.isLoading = false;
     },
@@ -34,7 +49,14 @@ const slice = createSlice({
 
     // Store rule by id
     getRuleSuccess(state, action) {
-      state.rule = action.payload;
+      state.rule = reOrderObject(action.payload);
+      state.isLoading = false;
+    },
+
+
+    // Reset stored rule
+    resetRuleSingle(state, action) {
+      state.rule = null;
       state.isLoading = false;
     },
 
@@ -42,16 +64,14 @@ const slice = createSlice({
     // Add/Update rule
     editRule(state, action) {
       const newRule = action.payload;
-      state.rules[newRule.id] = newRule;
-      state.isLoading = false;
+      state.rules[newRule.id] = reOrderObject(newRule);
     },
 
 
     // Delete rule
     deleteRule(state, action) {
-      const deletedRule = action.payload;
-      delete state.rules[deletedRule.id];
-      state.isLoading = false;
+      const deletedRuleId = action.payload;
+      delete state.rules[deletedRuleId];
     },
   }
 });
@@ -66,6 +86,7 @@ export const {
   startLoading,
   getRulesSuccess,
   getRuleSuccess,
+  resetRuleSingle,
   editRule,
   deleteRule,
 } = slice.actions;
@@ -112,7 +133,6 @@ export function getRuleById(id) {
  */
 export function postRule(rule) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.post(rulesUrl, rule);
     dispatch(slice.actions.editRule(response.data));
   };
@@ -124,7 +144,6 @@ export function postRule(rule) {
  */
 export function putRule(rule) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.put(`${rulesUrl}/${rule.id}`, rule);
     dispatch(slice.actions.editRule(response.data));
   };
@@ -136,7 +155,6 @@ export function putRule(rule) {
  */
 export function removeRule(id) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.delete(`${rulesUrl}/${id}`);
     dispatch(slice.actions.deleteRule(response.data));
   };

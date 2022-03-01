@@ -21,7 +21,6 @@ const slice = createSlice({
 
     // Store all terms
     getTermsSuccess(state, action) {
-      console.log(action.payload)
       const allTerms = action.payload;
       if (allTerms)
         allTerms.forEach((term) => {
@@ -42,15 +41,13 @@ const slice = createSlice({
     editTerm(state, action) {
       const editedTerm = action.payload;
       state.terms[editedTerm.id] = editedTerm;
-      state.isLoading = false;
     },
 
 
     // Delete term
     deleteTerm(state, action) {
-      const deletedTermI = action.payload;
-      delete state.terms[deletedTermI];
-      state.isLoading = false;
+      const deletedTermId = action.payload;
+      delete state.terms[deletedTermId];
     },
   }
 });
@@ -111,7 +108,6 @@ export function getRuleById(id) {
  */
 export function postTerm(term) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.post(termsUrl, term);
     dispatch(slice.actions.editTerm(response.data));
   };
@@ -123,7 +119,6 @@ export function postTerm(term) {
  */
 export function putTerm(term) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.put(`${termsUrl}/${term.id}`, term);
     dispatch(slice.actions.editTerm(response.data));
   };
@@ -135,7 +130,6 @@ export function putTerm(term) {
  */
 export function removeTerm(id) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     const response = await axios.delete(`${termsUrl}/${id}`);
     dispatch(slice.actions.deleteTerm(response.data));
   };
