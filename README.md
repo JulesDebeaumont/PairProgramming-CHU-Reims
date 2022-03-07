@@ -21,3 +21,18 @@ Application developed as part of a technical interview at the University Hospita
 ### 📎 3 - Misc
 
 - Reset DB and load seeders (Back/): `php artisan mirgrte:fresh --seed`
+
+
+### 📌 - Tools
+
+Front-end: 
+- React (core)
+- Redux (store)
+- Axios (request)
+- Notistack (notification)
+- Formik (form)
+- Yup (form validation)
+
+Back-end: 
+- Laravel (core)
+- Laravel-cors (cors)
