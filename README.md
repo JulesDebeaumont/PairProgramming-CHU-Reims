@@ -14,16 +14,17 @@ Application developed as part of a technical interview at the University Hospita
 
 - Launch your database
 - In the Back/ directory, run `php artisan serve`
-- Still in the Back/ directory, run `php artisan mirgrte:fresh --seed`
+- Still in the Back/ directory, run `php artisan migrate:fresh --seed`
 - In the Front/ directory, run `npm run start`
 
   
 ### 📎 3 - Misc
 
-- Reset DB and load seeders (Back/): `php artisan mirgrte:fresh --seed`
+- Reset DB and load seeders (Back/) : `php artisan migrate:fresh --seed`
+- Check all available routes for the api : `your_back_end_localhost/api`
 
 
-### 📌 - Tools
+### 📌 4 - Tools
 
 Front-end: 
 - React (core)
@@ -32,6 +33,8 @@ Front-end:
 - Notistack (notification)
 - Formik (form)
 - Yup (form validation)
+- Tailwind (style)
+
 
 Back-end: 
 - Laravel (core)
